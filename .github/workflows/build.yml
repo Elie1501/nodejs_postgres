@@ -20,12 +20,12 @@ jobs:
         run: docker ps
 
       - name: Wait for Database
-        run: sleep 10
+        run: sleep 15
 
-      - name: Verify API Health
+      - name: Verify
         run: |
-        
-          curl -f http://localhost:3000 || exit 1
+
+          curl -f http://localhost:3000 || (docker compose logs && exit 1)
 
       - name: Stop Services
         if: always()
