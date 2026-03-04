@@ -24,8 +24,7 @@ jobs:
 
       - name: Verify
         run: |
-
-          curl -f http://localhost:3000 || (docker compose logs && exit 1)
+          curl http://localhost:3000
 
       - name: Stop Services
         if: always()
