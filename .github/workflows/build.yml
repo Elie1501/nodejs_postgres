@@ -13,20 +13,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build and Start Services
-        run: docker-compose up -d --build
+      - name: Build / Start Services
+        run: docker compose up -d --build
 
       - name: Check Container Status
         run: docker ps
 
       - name: Wait for Database
-        run: sleep 10 # Laisse le temps à PostgreSQL de s'initialiser
+        run: sleep 10
 
       - name: Verify API Health
         run: |
-          # Teste si le serveur répond sur le port 3000 (ou ton port configuré)
+        
           curl -f http://localhost:3000 || exit 1
 
       - name: Stop Services
-        if: always() # S'assure que les containers sont coupés même si les tests échouent
-        run: docker-compose down
+        if: always()
+        run: docker compose down
